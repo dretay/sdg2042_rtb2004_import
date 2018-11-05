@@ -63,9 +63,20 @@ def get_wave_data(dev):
 
 if __name__ == '__main__': 
 	""""""
-	# Xstart, Xstop, record length in samples
-	print(scope.ask("CHAN:DATA:HEAD?"))
 	
+	
+	print(scope.ask("CHAN:DATA:HEAD?")) # Xstart, Xstop, record length in samples
+	print(scope.ask("CHAN:DATA:YRES?")) # vertical resolution
+	print(scope.ask("CHAN:DATA:YOR?")) # voltage for binary value 0
+	print(scope.ask("CHAN:DATA:XOR?")) # time of first sample
+	print(scope.ask("CHAN:DATA:XINC?")) # time between adjacent samples
+
+	scope.write("FORM UINT,8") #set format to unsigned 8bit integer
+	print(scope.ask("CHAN:DATA:YINC?")) #voltage value per bit
+	scope.ask("CHAN:DATA?") #chanel data
+
+	
+
 	# create_wave_file()
 	# send_wave_data(arbgen)
 	# arbgen.write("C1:SRATE MODE,TARB,VALUE,333333,INTER,LINE") #Use TrueArb and fixed sample rate to play every point
